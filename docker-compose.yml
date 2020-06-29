@@ -1,0 +1,26 @@
+version: '3'
+services:
+  # db:
+  #   image: mysql:5.6
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: go_db
+  #     MYSQL_USER: docker
+  #     MYSQL_PASSWORD: docker
+  #   container_name: golang_db
+  #   ports:
+  #     - "33060:3306"
+  #   tty: true
+  backend:
+    build:
+      context: ./docker/go
+      dockerfile: Dockerfile
+    volumes:
+      - "./app/.:/go/src/app"
+    container_name: golang_app
+    ports:
+      - "8888:8888"
+    tty: true
+    # depends_on:
+    #   - db
+    command: "air"
